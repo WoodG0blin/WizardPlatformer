@@ -17,6 +17,7 @@ namespace WizardsPlatformer
 
         [SerializeField] ActionState _state = ActionState.Idle;
 
+        private Level _level;
 
         private PlayerController _player;
         private CameraController _camera;
@@ -27,6 +28,8 @@ namespace WizardsPlatformer
 
         void Awake()
         {
+            _level = new Level(100);
+
             _player = new PlayerController(_playerView);
             _camera = new CameraController(_playerView, _backgrounds);
 

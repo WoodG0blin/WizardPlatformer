@@ -56,28 +56,32 @@
     <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\Views\AnimationController.cs" />
-    <Compile Include="Assets\Scripts\BackGroundManager.cs" />
-    <Compile Include="Assets\Scripts\Main.cs" />
-    <Compile Include="Assets\Scripts\Controllers\Controller.cs" />
-    <Compile Include="Assets\Scripts\SOs\AllAnimationsConfig.cs" />
-    <Compile Include="Assets\Scripts\Views\BasicView.cs" />
-    <Compile Include="Assets\Scripts\SOs\AnimationConfig.cs" />
     <Compile Include="Assets\Scripts\Utils\ContactsPuller.cs" />
+    <Compile Include="Assets\Scripts\Utils\Pool.cs" />
+    <Compile Include="Assets\Scripts\Views\AnimationSequence.cs" />
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controllers\AimController.cs" />
-    <Compile Include="Assets\Scripts\Utils\Pool.cs" />
-    <Compile Include="Assets\Scripts\Controllers\BarrelController.cs" />
-    <Compile Include="Assets\Scripts\WeaponFactory.cs" />
+    <Compile Include="Assets\Scripts\Views\AnimationController.cs" />
+    <Compile Include="Assets\Scripts\BackGroundManager.cs" />
     <Compile Include="Assets\Scripts\Views\InteractiveView.cs" />
-    <Compile Include="Assets\Scripts\Controllers\BallisticAimController.cs" />
-    <Compile Include="Assets\Scripts\Controllers\Traps\Scarecrow.cs" />
-    <Compile Include="Assets\Scripts\Views\DamagingView.cs" />
-    <Compile Include="Assets\Scripts\MapDetail.cs" />
+    <Compile Include="Assets\Scripts\SOs\AnimationConfig.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IMappable.cs" />
-    <Compile Include="Assets\Scripts\Views\AnimationSequence.cs" />
+    <Compile Include="Assets\Scripts\Main.cs" />
+    <Compile Include="Assets\Scripts\Controllers\BallisticAimController.cs" />
+    <Compile Include="Assets\Scripts\Views\BasicView.cs" />
+    <Compile Include="Assets\Scripts\MapDetail.cs" />
+    <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\WeaponFactory.cs" />
+    <Compile Include="Assets\Scripts\SOs\AllAnimationsConfig.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Traps\Scarecrow.cs" />
     <Compile Include="Assets\Scripts\Controllers\Enemy.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Controller.cs" />
+    <Compile Include="Assets\Scripts\Views\DamagingView.cs" />
+    <Compile Include="Assets\Scripts\Controllers\BarrelController.cs" />
+    <Compile Include="Assets\Scripts\Platform.cs" />
+    <Compile Include="Assets\Scripts\Gap.cs" />
+    <Compile Include="Assets\Scripts\LevelElement.cs" />
+    <Compile Include="Assets\Scripts\Level.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -329,6 +333,9 @@
     <Reference Include="Unity.Burst.Cecil.Mdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.CodeGen\Unity.Burst.Cecil.Mdb.dll</HintPath>
     </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+      <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Burst.Cecil.Pdb">
       <HintPath>Library\PackageCache\com.unity.burst@1.6.6\Unity.Burst.CodeGen\Unity.Burst.Cecil.Pdb.dll</HintPath>
     </Reference>
@@ -343,9 +350,6 @@
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.0.2\Runtime\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
-      <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.6f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -775,6 +779,10 @@
       <Project>{CFFB6D51-C3A8-07BB-13C0-6B934D961EE7}</Project>
       <Name>Unity.Burst.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="PackageToolsEditor.csproj">
+      <Project>{93A31B5D-F254-7ACA-3AF1-1074F1EA6D37}</Project>
+      <Name>PackageToolsEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.2D.IK.Editor.csproj">
       <Project>{7618AF88-DD12-6AA1-0B1B-3C3494DEEC00}</Project>
       <Name>Unity.2D.IK.Editor</Name>
@@ -847,6 +855,10 @@
       <Project>{383B14C8-CEFB-CA60-68E9-96F928180D9D}</Project>
       <Name>Unity.Burst</Name>
     </ProjectReference>
+    <ProjectReference Include="AstarPathfindingProject.csproj">
+      <Project>{8B05E7C3-8487-3E9C-EC94-9D12B565D0BE}</Project>
+      <Name>AstarPathfindingProject</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.VisualScripting.Shared.Editor.csproj">
       <Project>{C3122AD2-3D9F-3D28-0552-75E29ED61E18}</Project>
       <Name>Unity.VisualScripting.Shared.Editor</Name>
@@ -875,6 +887,10 @@
       <Project>{56D14C83-80EE-FD6E-AB8A-33492AB75D89}</Project>
       <Name>Unity.2D.Common.Runtime</Name>
     </ProjectReference>
+    <ProjectReference Include="AstarPathfindingProjectEditor.csproj">
+      <Project>{D7548367-A0AB-227B-3405-13DDBA2ADAC6}</Project>
+      <Name>AstarPathfindingProjectEditor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.2D.SpriteShape.Editor.csproj">
       <Project>{8F5E055A-81CC-37D7-4D69-60E631B6F87B}</Project>
       <Name>Unity.2D.SpriteShape.Editor</Name>
@@ -890,18 +906,6 @@
     <ProjectReference Include="Unity.VisualScripting.State.csproj">
       <Project>{8032CC7F-D9BA-F4AA-F2E1-0D200699A600}</Project>
       <Name>Unity.VisualScripting.State</Name>
-    </ProjectReference>
-    <ProjectReference Include="AstarPathfindingProjectEditor.csproj">
-      <Project>{D7548367-A0AB-227B-3405-13DDBA2ADAC6}</Project>
-      <Name>AstarPathfindingProjectEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="AstarPathfindingProject.csproj">
-      <Project>{8B05E7C3-8487-3E9C-EC94-9D12B565D0BE}</Project>
-      <Name>AstarPathfindingProject</Name>
-    </ProjectReference>
-    <ProjectReference Include="PackageToolsEditor.csproj">
-      <Project>{93A31B5D-F254-7ACA-3AF1-1074F1EA6D37}</Project>
-      <Name>PackageToolsEditor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
