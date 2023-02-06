@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 namespace WizardsPlatformer
 {
@@ -14,8 +15,8 @@ namespace WizardsPlatformer
         [SerializeField] private GameObject _bulletHeavyPrefab;
         [SerializeField] private BasicView _scareCrowView;
         [SerializeField] private BasicView _enemyView;
-
-        [SerializeField] ActionState _state = ActionState.Idle;
+        [SerializeField] private Tile[] _groundTiles;
+        [SerializeField] private Tilemap _groundTilemap;
 
         private Level _level;
 
@@ -28,30 +29,33 @@ namespace WizardsPlatformer
 
         void Awake()
         {
-            _level = new Level(100);
+            _level = new Level(100, _groundTiles, _groundTilemap);
 
             _player = new PlayerController(_playerView);
+            _player.SetPlayer(_level.GetStartPosition());
             _camera = new CameraController(_playerView, _backgrounds);
 
-            _enemy1 = new Enemy(_enemyView, _playerView);
+            //_enemy1 = new Enemy(_enemyView, _playerView);
 
-            _scareCrow = new Scarecrow(_scareCrowView);
+            //_scareCrow = new Scarecrow(_scareCrowView);
 
-            _weaponFactory = new WeaponFactory(_playerView);
-            _weapons.Add(_weaponFactory.GetWeapon(WeaponFactory.AimType.ballistic, _weaponObjects[0], _bulletHeavyPrefab));
-            _weapons.Add(_weaponFactory.GetWeapon(WeaponFactory.AimType.direct, _weaponObjects[1], _bulletPrefab));
+            //_weaponFactory = new WeaponFactory(_playerView);
+            //_weapons.Add(_weaponFactory.GetWeapon(WeaponFactory.AimType.ballistic, _weaponObjects[0], _bulletHeavyPrefab));
+            //_weapons.Add(_weaponFactory.GetWeapon(WeaponFactory.AimType.direct, _weaponObjects[1], _bulletPrefab));
         }
 
         void Update()
         {
+            _level.Update();
+
             _player.Update();
             _camera.Update();
 
-            _enemy1.Update();
+            //_enemy1.Update();
 
-            _scareCrow.Update();
+            //_scareCrow.Update();
 
-            foreach(Weapon w in _weapons) w.Update();
+            //foreach(Weapon w in _weapons) w.Update();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace WizardsPlatformer
 {
     public class BasicView : MonoBehaviour
     {
-        [SerializeField] private bool _animated = true;
+        [SerializeField] private bool _animated = false;
         [SerializeField] private AnimationSequence[] animations;
 
         private SpriteRenderer _renderer;
@@ -66,9 +66,11 @@ namespace WizardsPlatformer
             }
         }
 
+        public bool Animated { get => _animated; set => _animated = value; }
+
         private void Awake()
         {
-            _animator = new AnimationController(renderer, animations);
+            if(_animated) _animator = new AnimationController(renderer, animations);
         }
 
         private void Update()

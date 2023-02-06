@@ -57,31 +57,42 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Utils\ContactsPuller.cs" />
+    <Compile Include="Assets\Scripts\Level\LevelElement.cs" />
     <Compile Include="Assets\Scripts\Utils\Pool.cs" />
+    <Compile Include="Assets\Scripts\Level\Joint.cs" />
     <Compile Include="Assets\Scripts\Views\AnimationSequence.cs" />
     <Compile Include="Assets\Scripts\Controllers\CameraController.cs" />
     <Compile Include="Assets\Scripts\Controllers\AimController.cs" />
+    <Compile Include="Assets\Scripts\Level\Level.cs" />
     <Compile Include="Assets\Scripts\Views\AnimationController.cs" />
+    <Compile Include="Assets\Scripts\Level\Gap.cs" />
     <Compile Include="Assets\Scripts\BackGroundManager.cs" />
     <Compile Include="Assets\Scripts\Views\InteractiveView.cs" />
     <Compile Include="Assets\Scripts\SOs\AnimationConfig.cs" />
     <Compile Include="Assets\Scripts\Interfaces\IMappable.cs" />
+    <Compile Include="Assets\Scripts\Level\Platform.cs" />
     <Compile Include="Assets\Scripts\Main.cs" />
     <Compile Include="Assets\Scripts\Controllers\BallisticAimController.cs" />
     <Compile Include="Assets\Scripts\Views\BasicView.cs" />
-    <Compile Include="Assets\Scripts\MapDetail.cs" />
+    <Compile Include="Assets\Scripts\Level\MapDetail.cs" />
     <Compile Include="Assets\Scripts\Controllers\PlayerController.cs" />
     <Compile Include="Assets\Scripts\WeaponFactory.cs" />
+    <Compile Include="Assets\Scripts\Level\JumpPlatform.cs" />
     <Compile Include="Assets\Scripts\SOs\AllAnimationsConfig.cs" />
     <Compile Include="Assets\Scripts\Controllers\Traps\Scarecrow.cs" />
+    <Compile Include="Assets\Scripts\Level\SquaresGrid.cs" />
     <Compile Include="Assets\Scripts\Controllers\Enemy.cs" />
     <Compile Include="Assets\Scripts\Controllers\Controller.cs" />
+    <Compile Include="Assets\Scripts\Level\Bridge.cs" />
     <Compile Include="Assets\Scripts\Views\DamagingView.cs" />
     <Compile Include="Assets\Scripts\Controllers\BarrelController.cs" />
-    <Compile Include="Assets\Scripts\Platform.cs" />
-    <Compile Include="Assets\Scripts\Gap.cs" />
-    <Compile Include="Assets\Scripts\LevelElement.cs" />
-    <Compile Include="Assets\Scripts\Level.cs" />
+    <Compile Include="Assets\Scripts\Level\Lift.cs" />
+    <Compile Include="Assets\Scripts\Level\LevelObject.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Traps\Bowl.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Traps\FirePlace.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Traps\Rock.cs" />
+    <Compile Include="Assets\Scripts\Controllers\Traps\Spikes.cs" />
+    <Compile Include="Assets\Scripts\Level\Portal.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

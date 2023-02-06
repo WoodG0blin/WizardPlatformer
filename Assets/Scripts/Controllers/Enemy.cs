@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace WizardsPlatformer
 {
-    public class Enemy : Controller
+    public class Enemy : LevelObject
     {
         private BasicView _target;
         private Vector3 _patrolPoint;
@@ -20,14 +20,15 @@ namespace WizardsPlatformer
         private float _velocityX;
         private float _closingDistance = 1.2f;
 
-        public Enemy(BasicView view, BasicView target, float patrolDistance = 3.0f) : base(view)
+        public Enemy(Vector2Int gridPosition, float patrolDistance = 3.0f) : base("Demon", gridPosition + new Vector2Int(0,1))
         {
-            _target = target;
-            _patrolPoint = view.transform.position;
+            _target = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicView>();
             _patrolDistance = patrolDistance;
 
-            _contacts = new ContactsPuller(view.collider);
+            _contacts = new ContactsPuller(_view.collider);
             _layerMask = LayerMask.GetMask("Background");
+
+            _view.Animated = true;
         }
 
         public override void Update()
@@ -38,6 +39,12 @@ namespace WizardsPlatformer
             _view.rigidbody.velocity = new Vector2(_view.transform.localScale.x * _velocityX * _speed, 0);
 
             _view.animationState = _velocityX < 0.1f ? ActionState.Idle : ActionState.Walk;
+        }
+
+        public override void Draw(Vector2 _screenOffset)
+        {
+            base.Draw(_screenOffset);
+            _patrolPoint = _view.transform.position;
         }
 
         private bool IsPathClear()
@@ -68,7 +75,7 @@ namespace WizardsPlatformer
             RaycastHit2D hit = Physics2D.Raycast(
                         new Vector2(_view.transform.position.x, _view.transform.position.y),
                         new Vector2(_view.transform.localScale.x, -1),
-                        2f, _layerMask);
+                        0.75f, _layerMask);
             if (hit.collider != null) return true;
             return false;
         }
