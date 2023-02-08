@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace WizardsPlatformer
 {
-    public class BasicView : MonoBehaviour
+    public class BasicView : View
     {
         [SerializeField] private bool _animated = false;
         [SerializeField] private AnimationSequence[] animations;

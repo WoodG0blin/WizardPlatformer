@@ -30,7 +30,7 @@ namespace WizardsPlatformer
 
         public ActionState CurrentState { get => _currentState; }
 
-        public override void Update()
+        protected  override void OnUpdate()
         {
             if (_currentAnimation != null)
             {
@@ -71,7 +71,7 @@ namespace WizardsPlatformer
             _renderer.sprite = _baseSprite;
         }
 
-        public override void Dispose()
+        protected override void OnDispose()
         {
             _animations.Clear();
         }

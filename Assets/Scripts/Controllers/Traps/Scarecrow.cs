@@ -25,7 +25,7 @@ namespace WizardsPlatformer
             _counter = Random.Range(0, _coolDown2-0.1f);
         }
 
-        public override void Update()
+        protected override void OnUpdate()
         {
             if (_ready)
             {

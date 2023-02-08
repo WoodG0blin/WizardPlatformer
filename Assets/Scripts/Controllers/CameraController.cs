@@ -18,15 +18,15 @@ namespace WizardsPlatformer
 
         private Vector3 _oldPosition;
 
-        public CameraController(BasicView player, Transform[] backgrounds)
+        public CameraController(BasicView player)
         {
             _camera = Camera.main.transform;
             _player = player;
 
-            _backGround = new BackGroundManager(_camera, backgrounds);
+            _backGround = new BackGroundManager(_camera, _camera.GetComponent<CameraView>().backGrounds);
         }
 
-        public override void Update()
+        protected override void OnUpdate()
         {
             _targetX = _player.transform.position.x;
             if (Mathf.Abs(_player.rigidbody.velocity.x) > _offsetThreshold) _targetX += _offset * Mathf.Sign(_player.rigidbody.velocity.x);
@@ -41,7 +41,7 @@ namespace WizardsPlatformer
             _backGround.Update(_camera.position - _oldPosition);
         }
 
-        public override void Dispose()
+        protected override void OnDispose()
         {
             _camera = null;
             _player = null;

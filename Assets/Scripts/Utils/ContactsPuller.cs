@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace WizardsPlatformer
 {
-    public class ContactsPuller : Controller
+    public class ContactsPuller
     {
         private Collider2D _collider;
         private ContactPoint2D[] _contacts = new ContactPoint2D[5];
@@ -19,7 +19,7 @@ namespace WizardsPlatformer
             _collider = collider;
         }
 
-        public override void Update()
+        public void Update()
         {
             HasContactDown = false;
             HasContactLeft = false;
@@ -33,7 +33,7 @@ namespace WizardsPlatformer
             }
         }
 
-        public override void Dispose()
+        public void Dispose()
         {
             _collider = null;
             _contacts = null;

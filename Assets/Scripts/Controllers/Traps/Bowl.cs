@@ -15,7 +15,7 @@ namespace WizardsPlatformer
             mainWeapon = new Weapon(new AimController(aim, _player, 5), new BarrelController(aim, new Pool(bulletPrefab, 4)));
         }
 
-        public override void Update()
+        protected override void OnUpdate()
         {
             mainWeapon?.Update();
         }

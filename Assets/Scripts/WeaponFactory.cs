@@ -20,14 +20,14 @@ namespace WizardsPlatformer
             if(_aim.InDistance()) _barrel?.Fire(_aim.Aim());
         }
 
-        public override void Update()
+        protected override void OnUpdate()
         {
             _aim.Update();
             _barrel.Update();
             Fire();
         }
 
-        public override void Dispose()
+        protected override void OnDispose()
         {
             base.Dispose();
             _aim = null;
