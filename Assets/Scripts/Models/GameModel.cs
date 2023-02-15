@@ -10,7 +10,7 @@ namespace WizardsPlatformer
 
         public GameModel(GameState initialState)
         {
-            CurrentState = new SubscribtableProperty<GameState>();
+            CurrentState = new SubscribrablePropertyWithEqualsCheck <GameState>();
             CurrentState.Value = initialState;
         }
     }

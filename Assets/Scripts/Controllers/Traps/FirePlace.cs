@@ -11,8 +11,7 @@ namespace WizardsPlatformer
         {
             BasicView aim = _view.transform.Find("Aim").GetComponent<BasicView>();
             GameObject bulletPrefab = _view.transform.Find("Ammo").gameObject;
-            BasicView _player = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicView>();
-            mainWeapon = new Weapon(new AimController(aim, _player, 5), new BarrelController(aim, new Pool(bulletPrefab, 4)));
+            mainWeapon = new Weapon(new AimController(aim, 5), new BarrelController(aim, new Pool(bulletPrefab, 4)));
         }
 
         protected override void OnUpdate()

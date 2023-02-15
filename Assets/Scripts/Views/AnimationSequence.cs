@@ -45,6 +45,7 @@ namespace WizardsPlatformer
             _counter = 0;
         }
         public void SlowStop() => _slowStop = true;
+        public void ImmediateStop() => _sleep = true;
         public Sprite GetCurrentSprite() => Sprites[(int)_counter];
     }
 }

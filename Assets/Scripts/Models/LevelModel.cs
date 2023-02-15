@@ -10,6 +10,7 @@ namespace WizardsPlatformer
         public SubscriptableTrigger Jump { get; }
         public SubscriptableTrigger Fire { get; }
         public SubscriptableTrigger ESC { get; }
+        public SubscribrablePropertyWithEqualsCheck<Vector3> PlayerPosition { get; }
 
         public LevelModel()
         {
@@ -17,6 +18,7 @@ namespace WizardsPlatformer
             Jump = new SubscriptableTrigger();
             Fire = new SubscriptableTrigger();
             ESC = new SubscriptableTrigger();
+            PlayerPosition = new SubscribrablePropertyWithEqualsCheck<Vector3>();
         }
     }
 }

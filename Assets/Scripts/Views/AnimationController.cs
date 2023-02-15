@@ -14,18 +14,18 @@ namespace WizardsPlatformer
         private ActionState _currentState;
         private AnimationSequence _currentAnimation;
         private Sprite _baseSprite;
-        private Queue<ActionState> _animationsQueue;
+        private ActionState? _nextAnimation;
         public AnimationController(SpriteRenderer renderer, AnimationSequence[] animations)
         {
             _renderer = renderer;
             _animations.AddRange(animations);
+
             if (_animations != null && _animations.Count > 0)
             {
                 _currentAnimation = _animations[0];
                 _currentState = _currentAnimation.State;
             }
             _baseSprite = _renderer.sprite;
-            _animationsQueue = new Queue<ActionState>();
         }
 
         public ActionState CurrentState { get => _currentState; }
@@ -35,34 +35,45 @@ namespace WizardsPlatformer
             if (_currentAnimation != null)
             {
                 _currentAnimation.Update();
-                if (_currentAnimation.Sleep && _animationsQueue.Count > 0) ChangeAnimationState(_animationsQueue.Dequeue());
+                if (_currentAnimation.Sleep && _nextAnimation != null)
+                {
+                    ChangeAnimationState(_nextAnimation.Value);
+                    _nextAnimation = null;
+                }
                 _renderer.sprite = _currentAnimation.GetCurrentSprite();
             }
         }
 
-        public void ChangeAnimationState(ActionState newState)
+        public void ChangeAnimationState(ActionState newState, bool forcedChange = false)
         {
             if (newState == _currentState)
             {
                 _currentAnimation.Restart();
             }
-            else if(_currentAnimation.Sleep)
-            {
-                _currentState = newState;
-                var a = _animations.Find(match => match.State == _currentState);
-                if (a != null)
-                {
-                    _currentAnimation = a;
-                    a.Restart();
-                }
-                else Stop();
-            }
             else
             {
-                _animationsQueue.Enqueue(newState);
-                _currentAnimation.SlowStop();
+                if (forcedChange) _currentAnimation.ImmediateStop();
+
+                if (_currentAnimation.Sleep)
+                {
+                    _currentState = newState;
+                    var a = _animations.Find(match => match.State == _currentState);
+                    if (a != null)
+                    {
+                        _currentAnimation = a;
+                        a.Restart();
+                    }
+                    else Stop();
+                }
+                else
+                {
+                    if (_nextAnimation == null || _nextAnimation != newState)
+                    {
+                        _nextAnimation = newState;
+                        _currentAnimation.SlowStop();
+                    }
+                }
             }
-            
         }
 
         public void Stop()

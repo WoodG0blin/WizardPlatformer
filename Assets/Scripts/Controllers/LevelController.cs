@@ -23,20 +23,23 @@ namespace WizardsPlatformer
         private void Init()
         {
             Debug.Log("StartingLevel");
-            
-            var _player = new PlayerController(_levelModel);
-            AddController(_player);
-            AddController(new InputController(_levelModel));
+
             var _grounds = new GroundsController(100, _levelModel);
             AddController(_grounds);
+            AddController(new InputController(_levelModel));
+            AddController(new PlayerController(_levelModel, _grounds.GetStartPosition()));
+            AddController(new CameraController(_levelModel));
 
-            _player.SetPosition(_grounds.GetStartPosition());
-            _levelModel.HorizontalMove.SubscribeOnValueChange(_player.OnHorizontalMove);
-            _levelModel.Jump.SubscribeOnValueChange(_player.OnJump);
+            _levelModel.ESC.SubscribeOnValueChange(OnEsc);
+        }
 
-            AddController(new CameraController(_player.PlayerView));
-
-            _levelModel.ESC.SubscribeOnValueChange((b) => { if (b) _gameModel.CurrentState.Value = GameState.MainMenu; });
+        private void OnEsc(bool esc)
+        {
+            if (esc) _gameModel.CurrentState.Value = GameState.MainMenu;
+        }
+        protected override void OnDispose()
+        {
+            _levelModel.ESC.UnsubscribeOnValueChange(OnEsc);
         }
     }
 }

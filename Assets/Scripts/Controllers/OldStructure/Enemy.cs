@@ -15,14 +15,16 @@ namespace WizardsPlatformer
         private ContactsPuller _contacts;
         private float _goingDirection { get => Mathf.Sign(_view.transform.localScale.x); }
         private bool _inPatrol { get => (_view.transform.position - _patrolPoint).magnitude < _patrolDistance || _goingDirection == Mathf.Sign((_patrolPoint - _view.transform.position).x); }
-        private bool _pursuing { get => (_goingDirection == Mathf.Sign((_target.transform.position - _view.transform.position).x) && (_target.transform.position - _view.transform.position).magnitude < _sightDistance && Mathf.Abs(Vector3.Dot(_target.transform.position - _view.transform.position, _view.transform.right)) > 0.8f); }
+        private bool _pursuing { get => (_goingDirection == Mathf.Sign((Target.transform.position - _view.transform.position).x) && (Target.transform.position - _view.transform.position).magnitude < _sightDistance && Mathf.Abs(Vector3.Dot(_target.transform.position - _view.transform.position, _view.transform.right)) > 0.8f); }
         private LayerMask _layerMask;
         private float _velocityX;
         private float _closingDistance = 1.2f;
 
+        protected BasicView Target { get => _target ??= GameObject.FindGameObjectWithTag("Player").GetComponent<BasicView>();  }
+
         public Enemy(Vector2Int gridPosition, float patrolDistance = 3.0f) : base("Demon", gridPosition + new Vector2Int(0,1))
         {
-            _target = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicView>();
+            //_target = GameObject.FindGameObjectWithTag("Player").GetComponent<BasicView>();
             _patrolDistance = patrolDistance;
 
             _contacts = new ContactsPuller(_view.collider);
@@ -55,7 +57,7 @@ namespace WizardsPlatformer
                 {
                     if ((_goingDirection <0 && !_contacts.HasContactLeft) || (_goingDirection >0 && !_contacts.HasContactRight))
                     {
-                        if (_pursuing) _velocityX = Mathf.Abs(_target.transform.position.x - _view.transform.position.x) > _closingDistance ? 1 : 0;
+                        if (_pursuing) _velocityX = Mathf.Abs(Target.transform.position.x - _view.transform.position.x) > _closingDistance ? 1 : 0;
                         else _velocityX = 1;
                         return true;
                     }

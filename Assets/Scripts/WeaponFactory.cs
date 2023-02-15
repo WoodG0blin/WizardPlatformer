@@ -45,8 +45,8 @@ namespace WizardsPlatformer
         {
             BasicView aim = weapon.transform.Find("Aim").GetComponent<BasicView>();
             return type == AimType.ballistic ?
-                new Weapon(new BallisticAimController(aim, _player), new BarrelController(aim, new Pool(bulletPrefab, 10))) :
-                new Weapon(new AimController(aim, _player, 5), new BarrelController(aim, new Pool(bulletPrefab, 10)));
+                new Weapon(new BallisticAimController(aim), new BarrelController(aim, new Pool(bulletPrefab, 10))) :
+                new Weapon(new AimController(aim, 5), new BarrelController(aim, new Pool(bulletPrefab, 10)));
         }
     }
 }

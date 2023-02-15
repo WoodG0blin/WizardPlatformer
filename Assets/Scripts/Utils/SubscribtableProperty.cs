@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using System;
 
 namespace WizardsPlatformer
@@ -15,11 +12,8 @@ namespace WizardsPlatformer
             get => _value;
             set
             {
-                if (!_value.Equals(value))
-                {
-                    _value = value;
-                    _onValueChange?.Invoke(_value);
-                }
+                _value = value;
+                _onValueChange?.Invoke(_value);
             }
         }
         public void SubscribeOnValueChange(Action<T> onValueChange) => _onValueChange += onValueChange;
@@ -38,6 +32,22 @@ namespace WizardsPlatformer
                     _value = value;
                     _onValueChange?.Invoke(_value);
                     _value = !value;
+                }
+            }
+        }
+    }
+
+    public class SubscribrablePropertyWithEqualsCheck<T> : SubscribtableProperty<T>
+    {
+        public override T Value
+        {
+            get => _value;
+            set
+            {
+                if (!_value.Equals(value))
+                {
+                _value = value;
+                _onValueChange?.Invoke(_value);
                 }
             }
         }

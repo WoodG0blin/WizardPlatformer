@@ -62,8 +62,13 @@ namespace WizardsPlatformer
             get => _animator.CurrentState;
             set
             {
-                if (value != _animator.CurrentState) _animator.ChangeAnimationState(value);
+                _animator.ChangeAnimationState(value);
             }
+        }
+
+        protected void ChangeAnimation(ActionState newAnimation, bool forceChange = false)
+        {
+            _animator.ChangeAnimationState(newAnimation, forceChange);
         }
 
         public bool Animated { get => _animated; set => _animated = value; }
@@ -76,6 +81,9 @@ namespace WizardsPlatformer
         private void Update()
         {
             if(_animated) _animator.Update();
+            OnUpdate();
         }
+
+        protected virtual void OnUpdate() { }
     }
 }
